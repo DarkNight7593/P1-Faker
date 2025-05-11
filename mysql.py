@@ -108,7 +108,6 @@ try:
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
                 """, (dni_doctor, especialidad, dia_consulta, hora_consulta, dni_paciente, diagnostico, tratamiento))
 
-                print(f"📝 Cita insertada: Paciente {dni_paciente} - Doctor {dni_doctor} ({dia_consulta})")
 
         mysql_conn.commit()
         print("✅ Todos los datos se insertaron correctamente.")
