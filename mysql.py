@@ -37,7 +37,7 @@ try:
         port=os.getenv('PG_PORT')
     )
     pg_cursor = pg_conn.cursor()
-    pg_cursor.execute("SELECT dni, especialidad FROM doctores")
+    pg_cursor.execute("SELECT dni, especialidad FROM Doctor")
     doctores = pg_cursor.fetchall()
     print(f"✅ Conectado a PostgreSQL — {len(doctores)} doctores cargados.")
 except Exception as e:
