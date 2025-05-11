@@ -1,10 +1,15 @@
 import sys
+import os
 from pymongo import MongoClient
 from faker import Faker
 from random import choice, randint
 from datetime import datetime, date
 from typing import Optional
 from pydantic import BaseModel, Field
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde el archivo .env
+load_dotenv()
 
 fake = Faker()
 
@@ -32,8 +37,10 @@ def generar_dni_existente(collection) -> str:
 
 # Conexión a MongoDB
 try:
-    client = MongoClient('mongodb://mongo:<utec>@localhost:8010/')
-    client.server_info()
+    # Leer los datos del archivo .env
+    mongo_uri = f"mongodb://{os.getenv('MONGO_USER')}:{os.getenv('MONGO_PASSWORD')}@{os.getenv('HOST')}:{os.getenv('MONGO_PORT')}/"
+    client = MongoClient(mongo_uri)
+    client.server_info()  # Verificar si la conexión es exitosa
     print("✅ Conectado a MongoDB")
 except Exception as e:
     print("❌ Error al conectar a MongoDB:", e)
@@ -41,7 +48,7 @@ except Exception as e:
 
 # Cambia estos nombres según tu base real
 db = client.hospital  # ← Cambia aquí tu base
-collection = db.pacientes # ← Cambia aquí tu colección
+collection = db.pacientes  # ← Cambia aquí tu colección
 
 # Configuración
 cantidad_pacientes = 50
@@ -79,3 +86,4 @@ if data:
     print(f"✅ {len(result.inserted_ids)} pacientes insertados correctamente.")
 else:
     print("⚠️ No se generaron pacientes para insertar.")
+
