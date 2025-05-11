@@ -48,7 +48,7 @@ except Exception as e:
 
 # Cambia estos nombres según tu base real
 db = client.hospital  # ← Cambia aquí tu base
-collection = db.pacientes  # ← Cambia aquí tu colección
+collection = db.Pacientes  # ← Cambia aquí tu colección
 
 # Configuración
 cantidad_pacientes = 50
